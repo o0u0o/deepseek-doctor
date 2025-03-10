@@ -17,7 +17,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.2</version>
+        <version>3.3.8</version>
         <relativePath/>
     </parent>
 
@@ -44,7 +44,24 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
         </dependency>
 
+        <!-- 引入SpringAI相关坐标       -->
+        <dependency>
+            <groupId>io.springboot.ai</groupId>
+            <artifactId>spring-ai-ollama</artifactId>
+            <version>1.0.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springboot.ai</groupId>
+            <artifactId>spring-ai-ollama-spring-boot-starter</artifactId>
+            <version>1.0.3</version>
+        </dependency>
+
+
+
     </dependencies>
+
+
 
 
 

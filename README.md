@@ -18,3 +18,7 @@ curl http://localhost:11434/api/generate -d '{
 }'
 ```
 ![访问结果](https://public-images-1252032054.cos.ap-guangzhou.myqcloud.com/public%2FSnipaste_2025-03-10_22-34-09.png)
+
+
+## SpringAI
+Spring AI 是一个面向 AI 工程的应用框架，其目标是将 Spring 生态系统的可移植性和模块化设计等设计原则应用到 AI 领域，并推动将 POJO 作为应用的构建块应用于 AI 领域。
