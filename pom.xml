@@ -56,11 +56,12 @@
             <version>1.0.3</version>
         </dependency>
 
-        <dependency>
-            <groupId>io.springboot.ai</groupId>
-            <artifactId>spring-ai-ollama-spring-boot-starter</artifactId>
-            <version>1.0.3</version>
-        </dependency>
+        <!-- 两种选其一即可       -->
+<!--        <dependency>-->
+<!--            <groupId>io.springboot.ai</groupId>-->
+<!--            <artifactId>spring-ai-ollama-spring-boot-starter</artifactId>-->
+<!--            <version>1.0.3</version>-->
+<!--        </dependency>-->
 
 
 

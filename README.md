@@ -4,7 +4,7 @@
 ## 技术架构
 
 SpringBoot相关版本[重要]：
-- SpringBoot 3.4.2
+- SpringBoot 3.3.8
 - OpenJDK 21
 
 数据库选型：MySQL8
