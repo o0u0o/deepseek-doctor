@@ -57,16 +57,70 @@
         </dependency>
 
         <!-- 两种选其一即可       -->
-<!--        <dependency>-->
-<!--            <groupId>io.springboot.ai</groupId>-->
-<!--            <artifactId>spring-ai-ollama-spring-boot-starter</artifactId>-->
-<!--            <version>1.0.3</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>io.springboot.ai</groupId>
+            <artifactId>spring-ai-ollama-spring-boot-starter</artifactId>
+            <version>1.0.3</version>
+        </dependency>
 
 
 
     </dependencies>
 
+
+    <build>
+        <finalName>${project.name}</finalName>
+        <plugins>
+            <!--1、spring-boot-maven-plugin 打包插件 注意这里必须要 2.3.7.RELEASE（具体原因待研究）  -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--  2、maven-resources-plugin 资源插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <nonFilteredFileExtensions>
+                        <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+                    </nonFilteredFileExtensions>
+                </configuration>
+            </plugin>
+        </plugins>
+        <!-- 打包时，将lib目录下的jar包也打包进jar包中 （国网包需要通过此方式）START      -->
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/**</include>
+                </includes>
+            </resource>
+
+            <resource>
+                <directory>${project.basedir}/src/lib</directory>
+                <targetPath>BOOT-INF/lib/</targetPath>
+            </resource>
+
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/**</include>
+                </includes>
+                <excludes>
+                    <exclude>rebel.xml</exclude>
+                </excludes>
+            </resource>
+        </resources>
+        <!-- 打包时，将lib目录下的jar包也打包进jar包中 （国网包需要通过此方式）END      -->
+    </build>
 
 
 
