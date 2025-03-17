@@ -1,8 +1,10 @@
 package com.o0u0o.utils;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
@@ -35,6 +37,49 @@ public class SSEServer {
 
         return sseEmitter;
     }
+
+    /**
+     * <h2>发送单条消息</h2>
+     * @param userId 用户ID
+     * @param message 消息
+     */
+    public static void sendMessage(String userId, String message, SSEMessageType msgType) {
+        //判断sseClients是否为空
+        if(CollectionUtils.isEmpty(sseClients)) {
+            return;
+        }
+
+        if (sseClients.containsKey(userId)) {
+            SseEmitter sseEmitter = sseClients.get(userId);
+            sendEmitterMessage(sseEmitter, userId, message, SSEMessageType.MESSAGE);
+        }
+    }
+
+    /**
+     * <h2>使用SseEmitter推送消息</h2>
+     * @param sseEmitter SseEmitter对象
+     * @param userId 用户ID
+     * @param message 消息
+     * @param msgType 消息类型
+     */
+
+    public static void sendEmitterMessage(SseEmitter sseEmitter,
+                                   String userId,
+                                   String message,
+                                   SSEMessageType msgType) {
+        try {
+            SseEmitter.SseEventBuilder msg = SseEmitter.event()
+                    .id(userId)
+                    .name(msgType.getType())
+                    .data(message);
+            sseEmitter.send(msg);
+        } catch (IOException e) {
+            log.info("用户[{}]的消息推送发生异常", userId);
+            removeConnection(userId);
+        }
+
+    }
+
 
     /**
      * SSE链接完成后的回调方法（关闭链接的时候调用），
