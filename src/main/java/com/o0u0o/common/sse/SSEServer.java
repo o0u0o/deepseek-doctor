@@ -1,4 +1,4 @@
-package com.o0u0o.utils;
+package com.o0u0o.common.sse;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
@@ -53,6 +53,23 @@ public class SSEServer {
             SseEmitter sseEmitter = sseClients.get(userId);
             sendEmitterMessage(sseEmitter, userId, message, SSEMessageType.MESSAGE);
         }
+    }
+
+    /**
+     * <h2>发送消息给所有人</h2>
+     * @param message 消息内容
+     */
+    public static void sendMessageToAllUsers(String message) {
+        //判断sseClients是否为空
+        if(CollectionUtils.isEmpty(sseClients)) {
+            return;
+        }
+
+        sseClients.forEach((userId, sseEmitter) -> {
+            sendEmitterMessage(sseEmitter, userId, message, SSEMessageType.MESSAGE);
+
+        });
+
     }
 
     /**

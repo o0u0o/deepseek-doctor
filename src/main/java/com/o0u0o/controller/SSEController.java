@@ -1,7 +1,7 @@
 package com.o0u0o.controller;
 
-import com.o0u0o.utils.SSEMessageType;
-import com.o0u0o.utils.SSEServer;
+import com.o0u0o.common.sse.SSEMessageType;
+import com.o0u0o.common.sse.SSEServer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,6 +43,17 @@ public class SSEController {
                               @RequestParam String message){
 
         SSEServer.sendMessage(userId, message, SSEMessageType.MESSAGE);
+        return "OK";
+    }
+
+    /**
+     * <h2>发送给所有SSE客户端</h2>
+     * @param message 消息内容
+     * @return 发送结果
+     */
+    @GetMapping( "sendMessageAll")
+    public Object sendMessageAll(@RequestParam String message){
+        SSEServer.sendMessageToAllUsers( message);
         return "OK";
     }
 

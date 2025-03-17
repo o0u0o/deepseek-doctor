@@ -1,4 +1,4 @@
-package com.o0u0o.utils;
+package com.o0u0o.common.sse;
 
 import lombok.Getter;
 
