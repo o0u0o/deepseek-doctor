@@ -74,4 +74,14 @@ public class SSEController {
         return "OK";
     }
 
+    /**
+     * <h2>停止服务端SSE连接</h2>
+     * @param userId 用户ID
+     * @return Object
+     */
+    @GetMapping( "stopServer")
+    public Object stopServer(@RequestParam String userId){
+        SSEServer.stopServer(userId);
+        return "OK";
+    }
 }
