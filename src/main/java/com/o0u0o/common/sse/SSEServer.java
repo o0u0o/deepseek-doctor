@@ -97,6 +97,24 @@ public class SSEServer {
 
     }
 
+    /**
+     * <h2>主动切断SSE和客户端的连接</h2>
+     * @param userId  用户ID
+     */
+    public static void stopServer(String userId) {
+        if(CollectionUtils.isEmpty(sseClients)) {
+            return;
+        }
+
+        SseEmitter sseEmitter = sseClients.get(userId);
+        if (sseEmitter != null){
+            //complete 表示执行完毕，断开连接
+            sseEmitter.complete();
+            log.info("用户[{}]的SSE链接关闭成功", userId);
+        } else {
+            log.warn("用户[{}]的SSE链接无需关闭，请勿重复操作", userId);
+        }
+    }
 
     /**
      * SSE链接完成后的回调方法（关闭链接的时候调用），
