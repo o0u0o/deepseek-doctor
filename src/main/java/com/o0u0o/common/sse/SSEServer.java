@@ -116,6 +116,7 @@ public class SSEServer {
         if (sseEmitter != null){
             //complete 表示执行完毕，断开连接
             sseEmitter.complete();
+            removeConnection(userId);
             log.info("用户[{}]的SSE链接关闭成功", userId);
         } else {
             log.warn("用户[{}]的SSE链接无需关闭，请勿重复操作", userId);

@@ -49,25 +49,16 @@ public class SSEController {
         return "OK";
     }
 
-    /**
-     * <h2>发送给所有SSE客户端</h2>
-     * @param message 消息内容
-     * @return 发送结果
-     */
     @GetMapping( "sendMessageAll")
+    @Operation(summary = "发送给所有SSE客户端")
     public Object sendMessageAll(@RequestParam String message){
         SSEServer.sendMessageToAllUsers( message);
         return "OK";
     }
 
-    /**
-     * <h2>发送追加消息给SSE客户端 ADD时间流式输出</h2>
-     * @param userId 用户ID
-     * @param message 消息内容
-     * @return Object
-     * @throws InterruptedException 线程中断异常
-     */
+
     @GetMapping( "sendMessageAdd")
+    @Operation(summary = "发送追加消息给SSE客户端", description = "ADD时间流式输出")
     public Object sendMessageAdd(@RequestParam String userId, @RequestParam String message) throws InterruptedException {
         //测试代码，循环输出内容
         for (int i = 0; i < 10; i++) {
@@ -77,12 +68,8 @@ public class SSEController {
         return "OK";
     }
 
-    /**
-     * <h2>停止服务端SSE连接</h2>
-     * @param userId 用户ID
-     * @return Object
-     */
     @GetMapping( "stopServer")
+    @Operation(summary = "停止服务端SSE连接")
     public Object stopServer(@RequestParam String userId){
         SSEServer.stopServer(userId);
         return "OK";

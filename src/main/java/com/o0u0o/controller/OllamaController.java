@@ -1,6 +1,7 @@
 package com.o0u0o.controller;
 
 import com.o0u0o.service.OllamaService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.ChatResponse;
@@ -22,6 +23,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/ollama")
+@Tag(name = "ollama接口(OllamaController)")
 public class OllamaController {
 
     @Resource

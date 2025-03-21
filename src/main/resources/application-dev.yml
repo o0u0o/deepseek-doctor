@@ -6,6 +6,9 @@ logging:
   level:
     root: info
 
+# swagger增强
+knife4j:
+  enable: true
 # springdoc-openapi项目配置
 springdoc:
   swagger-ui:
@@ -15,18 +18,7 @@ springdoc:
   api-docs:
     path: /v3/api-docs
   group-configs:
-    - group: '统一接口(UNICOM-API)服务'
+    - group: '智能医生(DEEPSEEK-DOCTOR)服务'
+      display-name: DEEPSEEK-DOCTOR
       paths-to-match: '/**'
       packages-to-scan: com.o0u0o.controller
-knife4j:                      # swagger增强
-  enable: true
-  openapi:
-    title: 统一接口(UNICOM-API)服务Swagger文档
-    description: "`统一短信平台-统一接口(UNICOM-API)服务`,**接口文档**"
-    email: jobs@techgeng.com
-    concat: o0u0o
-    url: https://docs.xiaominfo.com
-    version: v4.0
-    license: Apache 2.0
-    license-url: https://stackoverflow.com/
-    terms-of-service-url: https://stackoverflow.com/
