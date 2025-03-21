@@ -7,6 +7,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
 /**
@@ -23,6 +24,9 @@ public class SSEServer {
     // 使用Map存储客户端的SseEmitter,用于关联用户id和sse的连接
     private static Map<String, SseEmitter> sseClients = new ConcurrentHashMap<>();
 
+    //在线人数 用于统计总在线人数
+    private static AtomicInteger onlineCounts = new AtomicInteger(0);
+
     public static SseEmitter connect(String userId) {
         //设置超时时间，0表示不过期。默认30秒，超时未完成任务则会抛出异常：TimeoutException
         SseEmitter sseEmitter = new SseEmitter(0L);
@@ -34,6 +38,8 @@ public class SSEServer {
 
         sseClients.put(userId, sseEmitter);
         log.info("当前创建新的SSE连接，用户ID为：{}", userId);
+
+        onlineCounts.getAndIncrement();
 
         return sseEmitter;
     }
@@ -162,5 +168,15 @@ public class SSEServer {
     public static void removeConnection(String userId) {
         sseClients.remove(userId);
         log.info("当前移除SSE连接，用户ID为：{}", userId);
+        //断开后累减
+        onlineCounts.getAndDecrement();
+    }
+
+    /**
+     * <h2>获取当前在线人数</h2>
+     * @return int 在线人数
+     */
+    public static int getOnlineCounts() {
+        return onlineCounts.intValue();
     }
 }

@@ -2,6 +2,8 @@ package com.o0u0o.controller;
 
 import com.o0u0o.common.sse.SSEMessageType;
 import com.o0u0o.common.sse.SSEServer;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 @Slf4j
 @RestController
 @RequestMapping("/sse")
+@Tag(name = "服务端发送消息(SSEController)")
 public class SSEController {
 
     /**
@@ -83,5 +86,11 @@ public class SSEController {
     public Object stopServer(@RequestParam String userId){
         SSEServer.stopServer(userId);
         return "OK";
+    }
+
+    @GetMapping( "getOnlineCounts")
+    @Operation(summary = "获取在线人数", description = "获得当前所有的会话总连接数")
+    public Object getOnlineCounts(){
+        return SSEServer.getOnlineCounts();
     }
 }
