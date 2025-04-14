@@ -1,6 +1,7 @@
 package com.o0u0o.controller;
 
 import com.o0u0o.service.OllamaService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +15,7 @@ import reactor.core.publisher.Flux;
 import java.util.List;
 
 /**
- * <h1></h1>
+ * <h1>ollama接口</h1>
  *
  * @author o0u0o
  * @description 用于测试
@@ -29,23 +30,20 @@ public class OllamaController {
     @Resource
     private OllamaService ollamaService;
 
-    /**
-     * <h2>测试调用Ollama本地模型</h2>
-     *
-     * @param msg 请求消息
-     * @return Object
-     */
     @GetMapping("/ai/chat")
+    @Operation(summary = "Ollama聊天-同步调用")
     public Object aiOllamaChat(@RequestParam String msg){
         return ollamaService.aiOllamaChat(msg);
     }
 
     @GetMapping("/ai/stream1")
+    @Operation(summary = "Ollama聊天-流式1")
     public Flux<ChatResponse> aiOllamaChat1(@RequestParam String msg){
         return ollamaService.aiOllamaStream1(msg);
     }
 
     @GetMapping("/ai/stream2")
+    @Operation(summary = "Ollama聊天-流式2")
     public List<String> aiOllamaStream2(@RequestParam String msg){
         return ollamaService.aiOllamaStream2(msg);
     }

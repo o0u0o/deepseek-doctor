@@ -7,4 +7,4 @@ spring:
     ollama:
       base-url: http://127.0.0.1:11434
       chat:
-        model: deepseek-r1:1.5b   # 可更改为其他模型
+        model: deepseek-r1:7b   # 可更改为其他模型
