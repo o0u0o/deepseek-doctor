@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  * <h1>Ollama接口实现</h1>
  *
  * @author o0u0o
- * @description
+ * @description Ollama框架的服务实现
  * @since 2025/3/11 00:45
  */
 @Slf4j
